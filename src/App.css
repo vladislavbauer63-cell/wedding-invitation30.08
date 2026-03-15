@@ -569,7 +569,8 @@ a {
   margin: 0 auto;
   padding: 40px 28px 34px;
   border-radius: 34px;
-  background: linear-gradient(180deg, rgba(164, 161, 151, 0.96), rgba(148, 157, 132, 0.96));
+  background: linear-gradient(180deg, rgba(122, 17, 24, 0.16), rgba(74, 11, 18, 0.12)), #e7ddd4;
+  border: 1px solid rgba(74, 11, 18, 0.08);
   box-shadow: 0 14px 34px rgba(74, 11, 18, 0.1);
   overflow: hidden;
 }
@@ -578,17 +579,17 @@ a {
   position: absolute;
   font-size: 54px;
   line-height: 1;
-  color: rgba(255, 255, 255, 0.86);
+  color: rgba(122, 17, 24, 0.42);
   pointer-events: none;
 }
 
 .questionnaire-heart-left {
   left: 18px;
-  top: 74px;
+  top: 128px;
 }
 
 .questionnaire-heart-right {
-  right: 24px;
+  right: 18px;
   bottom: 88px;
 }
 
@@ -596,7 +597,7 @@ a {
   margin: 0;
   font-size: clamp(54px, 12vw, 74px);
   line-height: 0.95;
-  color: #fffaf4;
+  color: #4a0b12;
 }
 
 .questionnaire-subtitle {
@@ -604,7 +605,7 @@ a {
   max-width: 360px;
   font-size: 17px;
   line-height: 1.5;
-  color: rgba(255, 250, 244, 0.92);
+  color: #6a3942;
 }
 
 .questionnaire-form {
@@ -623,7 +624,7 @@ a {
   font-size: 16px;
   line-height: 1.45;
   font-weight: 500;
-  color: #fffaf4;
+  color: #4a0b12;
 }
 
 .questionnaire-input,
@@ -632,7 +633,7 @@ a {
   border: none;
   outline: none;
   border-radius: 22px;
-  background: rgba(255, 250, 244, 0.92);
+  background: rgba(255, 249, 244, 0.95);
   color: #4a0b12;
   font-family: 'Montserrat', sans-serif;
   font-size: 15px;
@@ -661,7 +662,7 @@ a {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #fffaf4;
+  color: #6a3942;
   font-size: 15px;
   line-height: 1.4;
   cursor: pointer;
@@ -674,8 +675,13 @@ a {
   cursor: pointer;
 }
 
-.questionnaire-submit {
+.questionnaire-submit-wrap {
+  display: flex;
+  justify-content: center;
   margin-top: 8px;
+}
+
+.questionnaire-submit {
   min-width: 180px;
   padding: 16px 28px;
   border: none;
@@ -708,12 +714,12 @@ a {
 
   .questionnaire-heart-left {
     left: 12px;
-    top: 70px;
+    top: 132px;
   }
 
   .questionnaire-heart-right {
-    right: 16px;
-    bottom: 90px;
+    right: 12px;
+    bottom: 108px;
   }
 
   .questionnaire-title {

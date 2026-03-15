@@ -382,7 +382,7 @@ export default function App() {
           </motion.div>
         </AnimatedSection>
 
-                      <AnimatedSection className="center-section questionnaire-section" variant="soft">
+                              <AnimatedSection className="center-section questionnaire-section" variant="soft">
           <div className="questionnaire-card">
             <div className="questionnaire-heart questionnaire-heart-left">♡</div>
             <div className="questionnaire-heart questionnaire-heart-right">♡</div>
