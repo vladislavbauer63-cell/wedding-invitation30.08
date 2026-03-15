@@ -439,98 +439,147 @@ export default function App() {
           </motion.div>
         </AnimatedSection>
 
-                              <AnimatedSection className="center-section questionnaire-section" variant="soft">
-          <div className="questionnaire-card">
-            <div className="questionnaire-heart questionnaire-heart-left">♡</div>
-            <div className="questionnaire-heart questionnaire-heart-right">♡</div>
+                            <AnimatedSection className="center-section questionnaire-section" variant="soft">
+  <div className="questionnaire-card">
+    <div className="questionnaire-heart questionnaire-heart-left">♡</div>
+    <div className="questionnaire-heart questionnaire-heart-right">♡</div>
 
-            <div className="questionnaire-title comforter-title">Анкета</div>
-            <p className="questionnaire-subtitle">
-              Пожалуйста, подтвердите свое присутствие
-            </p>
+    <div className="questionnaire-title comforter-title">Анкета</div>
+    <p className="questionnaire-subtitle">
+      Пожалуйста, подтвердите свое присутствие
+    </p>
 
-            <form className="questionnaire-form">
-              <div className="questionnaire-field">
-                <label className="questionnaire-label">Ваше Имя и Фамилия</label>
-                <input
-                  type="text"
-                  className="questionnaire-input"
-                  placeholder="ФИО"
-                />
-              </div>
+    <form className="questionnaire-form" onSubmit={handleQuestionnaireSubmit}>
+      <div className="questionnaire-field">
+        <label className="questionnaire-label">Ваше Имя и Фамилия</label>
+        <input
+          type="text"
+          className="questionnaire-input"
+          placeholder="ФИО"
+          value={guestName}
+          onChange={(e) => setGuestName(e.target.value)}
+        />
+      </div>
 
-              <div className="questionnaire-field">
-                <div className="questionnaire-label">Вы сможете присутствовать?</div>
-                <div className="questionnaire-options">
-                  <label className="questionnaire-option">
-                    <input type="radio" name="attendance" />
-                    <span>Да</span>
-                  </label>
-                  <label className="questionnaire-option">
-                    <input type="radio" name="attendance" />
-                    <span>К сожалению, нет</span>
-                  </label>
-                </div>
-              </div>
+      <div className="questionnaire-field">
+        <div className="questionnaire-label">Вы сможете присутствовать?</div>
+        <div className="questionnaire-options">
+          <label className="questionnaire-option">
+            <input
+              type="radio"
+              name="attendance"
+              checked={attendance === 'Да'}
+              onChange={() => setAttendance('Да')}
+            />
+            <span>Да</span>
+          </label>
+          <label className="questionnaire-option">
+            <input
+              type="radio"
+              name="attendance"
+              checked={attendance === 'К сожалению, нет'}
+              onChange={() => setAttendance('К сожалению, нет')}
+            />
+            <span>К сожалению, нет</span>
+          </label>
+        </div>
+      </div>
 
-              <div className="questionnaire-field">
-                <div className="questionnaire-label">Какое горячее Вы предпочитаете?</div>
-                <div className="questionnaire-options">
-                  <label className="questionnaire-option">
-                    <input type="radio" name="food" />
-                    <span>Мясо</span>
-                  </label>
-                  <label className="questionnaire-option">
-                    <input type="radio" name="food" />
-                    <span>Рыба</span>
-                  </label>
-                  <label className="questionnaire-option">
-                    <input type="radio" name="food" />
-                    <span>Курица</span>
-                  </label>
-                </div>
-              </div>
+      <div className="questionnaire-field">
+        <div className="questionnaire-label">Какое горячее Вы предпочитаете?</div>
+        <div className="questionnaire-options">
+          <label className="questionnaire-option">
+            <input
+              type="radio"
+              name="food"
+              checked={food === 'Мясо'}
+              onChange={() => setFood('Мясо')}
+            />
+            <span>Мясо</span>
+          </label>
+          <label className="questionnaire-option">
+            <input
+              type="radio"
+              name="food"
+              checked={food === 'Рыба'}
+              onChange={() => setFood('Рыба')}
+            />
+            <span>Рыба</span>
+          </label>
+          <label className="questionnaire-option">
+            <input
+              type="radio"
+              name="food"
+              checked={food === 'Курица'}
+              onChange={() => setFood('Курица')}
+            />
+            <span>Курица</span>
+          </label>
+        </div>
+      </div>
 
-              <div className="questionnaire-field">
-                <div className="questionnaire-label">
-                  Уточните Ваши предпочтения в напитках, выбрав один или несколько вариантов:
-                </div>
-                <div className="questionnaire-options">
-                  <label className="questionnaire-option">
-                    <input type="checkbox" />
-                    <span>Шампанское</span>
-                  </label>
-                  <label className="questionnaire-option">
-                    <input type="checkbox" />
-                    <span>Вино</span>
-                  </label>
-                  <label className="questionnaire-option">
-                    <input type="checkbox" />
-                    <span>Виски + кола</span>
-                  </label>
-                  <label className="questionnaire-option">
-                    <input type="checkbox" />
-                    <span>Безалкогольные напитки</span>
-                  </label>
-                </div>
-              </div>
+      <div className="questionnaire-field">
+        <div className="questionnaire-label">
+          Уточните Ваши предпочтения в напитках, выбрав один или несколько вариантов:
+        </div>
+        <div className="questionnaire-options">
+          <label className="questionnaire-option">
+            <input
+              type="checkbox"
+              checked={drinks.includes('Шампанское')}
+              onChange={() => toggleDrink('Шампанское')}
+            />
+            <span>Шампанское</span>
+          </label>
+          <label className="questionnaire-option">
+            <input
+              type="checkbox"
+              checked={drinks.includes('Вино')}
+              onChange={() => toggleDrink('Вино')}
+            />
+            <span>Вино</span>
+          </label>
+          <label className="questionnaire-option">
+            <input
+              type="checkbox"
+              checked={drinks.includes('Виски + кола')}
+              onChange={() => toggleDrink('Виски + кола')}
+            />
+            <span>Виски + кола</span>
+          </label>
+          <label className="questionnaire-option">
+            <input
+              type="checkbox"
+              checked={drinks.includes('Безалкогольные напитки')}
+              onChange={() => toggleDrink('Безалкогольные напитки')}
+            />
+            <span>Безалкогольные напитки</span>
+          </label>
+        </div>
+      </div>
 
-              <div className="questionnaire-field">
-                <label className="questionnaire-label">Комментарий или пожелания</label>
-                <textarea
-                  className="questionnaire-textarea"
-                  placeholder="Например: не употребляю алкоголь, есть аллергия, нужен детский стул и т.д."
-                />
-              </div>
+      <div className="questionnaire-field">
+        <label className="questionnaire-label">Комментарий или пожелания</label>
+        <textarea
+          className="questionnaire-textarea"
+          placeholder="Например: не употребляю алкоголь, есть аллергия, нужен детский стул и т.д."
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+        />
+      </div>
 
-              <div className="questionnaire-submit-wrap">
-                <button type="button" className="questionnaire-submit">
-                  ОТПРАВИТЬ
-                </button>
-              </div>
-            </form>
-          </div>
-        </AnimatedSection>
+      <div className="questionnaire-submit-wrap">
+        <button type="submit" className="questionnaire-submit" disabled={isSubmitting}>
+          {isSubmitting ? 'ОТПРАВКА...' : 'ОТПРАВИТЬ'}
+        </button>
+      </div>
+
+      {submitMessage ? (
+        <div className="questionnaire-message">{submitMessage}</div>
+      ) : null}
+    </form>
+  </div>
+</AnimatedSection>
 
         <AnimatedSection className="center-section">
           <SectionTitle>Детали</SectionTitle>
