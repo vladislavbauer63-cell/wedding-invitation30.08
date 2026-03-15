@@ -487,9 +487,9 @@ img {
 
 .dress-single-photo {
   width: 100%;
-  max-width: 320px;
-  height: 220px;
-  object-fit: cover;
+  max-width: 420px;
+  height: auto;
+  object-fit: contain;
   border-radius: 18px;
   display: block;
 }
