@@ -40,6 +40,8 @@ const venueImage =
 const heroImage = '/hero.jpg'
 const countdownImage = '/countdown.jpg'
 const dressCodeImage = '/dresscode.jpg'
+const chatImage1 = '/chat1.jpg'
+const chatImage2 = '/chat2.jpg'
 const mapUrl =
   'https://2gis.ru/irkutsk/search/%D0%BF%D0%B0%D0%BD%D0%BE%D1%80%D0%B0%D0%BC%D0%B0%20%D1%85%D0%BE%D0%BB%D0%BB/firm/70000001100068753/104.325811%2C52.22267?m=104.280722%2C52.28858%2F10.86'
 
@@ -427,27 +429,35 @@ export default function App() {
             <p>Давайте поделимся друг с другом счастливыми моментами этого важного дня и будем на связи!</p>
           </div>
 
-          <div className="chat-images">
-            <motion.div
-              className="chat-image-left"
-              initial={{ opacity: 0, x: -16, y: 16, rotate: -2 }}
-              whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
-              viewport={{ once: true, amount: 0.35 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-            >
-              <PhotoPlaceholder label="ФОТО 1" tone="soft" className="chat-photo" />
-            </motion.div>
+<div className="chat-images">
+  <motion.div
+    className="chat-image-left"
+    initial={{ opacity: 0, x: -16, y: 16, rotate: -2 }}
+    whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
+    viewport={{ once: true, amount: 0.35 }}
+    transition={{ duration: 0.8, ease: 'easeOut' }}
+  >
+    <img
+      src={chatImage1}
+      alt="Фото пары 1"
+      className="chat-photo"
+    />
+  </motion.div>
 
-            <motion.div
-              className="chat-image-right"
-              initial={{ opacity: 0, x: 16, y: 20, rotate: 2 }}
-              whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
-              viewport={{ once: true, amount: 0.35 }}
-              transition={{ duration: 0.8, delay: 0.08, ease: 'easeOut' }}
-            >
-              <PhotoPlaceholder label="ФОТО 2" tone="warm" className="chat-photo" />
-            </motion.div>
-          </div>
+  <motion.div
+    className="chat-image-right"
+    initial={{ opacity: 0, x: 16, y: 20, rotate: 2 }}
+    whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
+    viewport={{ once: true, amount: 0.35 }}
+    transition={{ duration: 0.8, delay: 0.08, ease: 'easeOut' }}
+  >
+    <img
+      src={chatImage2}
+      alt="Фото пары 2"
+      className="chat-photo"
+    />
+  </motion.div>
+</div>
 
           <motion.button
             className="chat-button"
@@ -467,7 +477,7 @@ export default function App() {
             <DetailCard delay={0.03}>
               По всем вопросам, просим обращаться к нашему организатору:
               <br />
-              Екатерина +7 950 140 0699
+              Екатерина +79501400699
             </DetailCard>
           </div>
 
