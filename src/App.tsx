@@ -459,7 +459,7 @@ export default function App() {
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.85, delay: 0.08, ease: 'easeOut' }}
           >
-            <span className="closing-prefix">С любовью</span>
+          <span className="closing-prefix">С любовью,</span>
             <span className="closing-names comforter-title">Людмила  и  Владислав</span>
           </motion.div>
 

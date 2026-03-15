@@ -45,9 +45,10 @@ img {
 
 .hero-invite {
   margin-bottom: 32px;
-  font-size: 38px;
-  line-height: 1.15;
-  font-weight: 500;
+  font-size: clamp(44px, 10vw, 76px);
+  line-height: 1;
+  font-family: 'Great Vibes', cursive;
+  font-weight: 400;
   color: #30302e;
 }
 
@@ -469,7 +470,7 @@ img {
 }
 
 .closing-prefix {
-  font-size: 22px;
+  font-size: 30px;
   font-weight: 500;
   line-height: 1.2;
 }
