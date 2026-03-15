@@ -306,8 +306,11 @@ img {
   border-radius: 20px;
 }
 
-.countdown-photo {
+.countdown-photo-image {
+  width: 100%;
   height: 300px;
+  object-fit: cover;
+  display: block;
 }
 
 .countdown-darken {
@@ -378,17 +381,19 @@ img {
   border: 1px solid #d7d4cd;
 }
 
-.dress-images {
+.dress-single-wrap {
   margin-top: 32px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  padding: 0 40px;
+  display: flex;
+  justify-content: center;
 }
 
-.dress-photo {
-  height: 220px;
+.dress-single-photo {
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+  object-fit: contain;
   border-radius: 18px;
+  display: block;
 }
 
 .details-list {
@@ -433,6 +438,8 @@ img {
   width: 145px;
   height: 180px;
   border-radius: 18px;
+  object-fit: cover;
+  display: block;
 }
 
 .chat-button {
@@ -463,70 +470,6 @@ img {
   margin-top: 16px;
   font-size: 24px;
   color: #55544f;
-}
-
-.photo-placeholder {
-  position: relative;
-  overflow: hidden;
-  border-radius: 22px;
-}
-
-.photo-placeholder-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.55), transparent 30%),
-    radial-gradient(circle at 25% 75%, rgba(255, 255, 255, 0.18), transparent 20%);
-}
-
-.dress-single-wrap {
-  margin-top: 32px;
-  display: flex;
-  justify-content: center;
-}
-
-.dress-single-photo {
-  width: 100%;
-  max-width: 420px;
-  height: auto;
-  object-fit: contain;
-  border-radius: 18px;
-  display: block;
-}
-
-.countdown-photo-image {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  display: block;
-}
-
-.photo-placeholder-label {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 16px;
-  text-align: center;
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.85);
-}
-
-.photo-warm {
-  background: linear-gradient(135deg, #d8c5af 0%, #b38f6d 50%, #6a553f 100%);
-}
-
-.photo-cool {
-  background: linear-gradient(135deg, #d9dfe2 0%, #c4cfd5 50%, #8a8f8f 100%);
-}
-
-.photo-olive {
-  background: linear-gradient(135deg, #d9ddd4 0%, #b8bea8 50%, #6d705d 100%);
-}
-
-.photo-soft {
-  background: linear-gradient(135deg, #ebe7e0 0%, #d8d1c7 50%, #bdb3a6 100%);
 }
 
 @media (min-width: 640px) {
@@ -564,10 +507,6 @@ img {
 
   .closing-text {
     font-size: 50px;
-  }
-
-  .dress-images {
-    padding: 0 56px;
   }
 
   .chat-images {

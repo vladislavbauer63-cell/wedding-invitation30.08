@@ -37,11 +37,13 @@ const palette = ['#A4A197', '#6C6F38', '#5B3A29', '#9A001E', '#7A1118']
 const weddingDate = new Date('2026-08-30T15:00:00')
 const venueImage =
   'https://img.arendazala.net/pcpYKZHNBtIq5_xLFkVQl6NKqQXY400iIvGYAFQzqnyMofofuAAkipENeSt6t4gSbcJVW2858lcp22HtYCqqXNQzcjNZx9R6TEg3Zw=w560-h332-n-l95-rw'
+
 const heroImage = '/hero.jpg'
 const countdownImage = '/countdown.jpg'
 const dressCodeImage = '/dresscode.jpg'
 const chatImage1 = '/chat1.jpg'
 const chatImage2 = '/chat2.jpg'
+
 const mapUrl =
   'https://2gis.ru/irkutsk/search/%D0%BF%D0%B0%D0%BD%D0%BE%D1%80%D0%B0%D0%BC%D0%B0%20%D1%85%D0%BE%D0%BB%D0%BB/firm/70000001100068753/104.325811%2C52.22267?m=104.280722%2C52.28858%2F10.86'
 
@@ -128,23 +130,6 @@ function SectionTitle({ children }: { children: ReactNode }) {
   return <h2 className="section-title">{children}</h2>
 }
 
-function PhotoPlaceholder({
-  label,
-  tone = 'soft',
-  className = '',
-}: {
-  label: string
-  tone?: 'warm' | 'cool' | 'olive' | 'soft'
-  className?: string
-}) {
-  return (
-    <div className={`photo-placeholder photo-${tone} ${className}`}>
-      <div className="photo-placeholder-overlay" />
-      <div className="photo-placeholder-label">{label}</div>
-    </div>
-  )
-}
-
 function TimelinePill({ item, delay = 0 }: { item: TimelineItem; delay?: number }) {
   return (
     <motion.div
@@ -189,11 +174,7 @@ function CountdownCard({ countdown }: { countdown: CountdownParts }) {
 
   return (
     <div className="countdown-card">
-      <img
-        src={countdownImage}
-        alt="Фото пары"
-        className="countdown-photo-image"
-      />
+      <img src={countdownImage} alt="Фото пары" className="countdown-photo-image" />
       <div className="countdown-darken" />
       <div className="countdown-overlay">
         <div className="countdown-heading">До свадьбы осталось...</div>
@@ -391,18 +372,14 @@ export default function App() {
           </div>
 
           <motion.div
-  className="dress-single-wrap"
-  initial={{ opacity: 0, y: 12, scale: 0.98 }}
-  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-  viewport={{ once: true, amount: 0.35 }}
-  transition={{ duration: 0.75, ease: 'easeOut' }}
->
-  <img
-    src={dressCodeImage}
-    alt="Дресс-код"
-    className="dress-single-photo"
-  />
-</motion.div>
+            className="dress-single-wrap"
+            initial={{ opacity: 0, y: 12, scale: 0.98 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ duration: 0.75, ease: 'easeOut' }}
+          >
+            <img src={dressCodeImage} alt="Дресс-код" className="dress-single-photo" />
+          </motion.div>
         </AnimatedSection>
 
         <AnimatedSection className="center-section">
@@ -413,7 +390,8 @@ export default function App() {
             </DetailCard>
 
             <DetailCard delay={0.1}>
-              Приятным комплиментом для нас будет, если вместо цветов Вы подарите бутылочку алкогольного напитка для пополнения нашей семейной коллекции.
+              Приятным комплиментом для нас будет, если вместо цветов Вы решите подарить нам
+              бутылочку вина для нашей семейной винотеки.
             </DetailCard>
           </div>
         </AnimatedSection>
@@ -429,35 +407,27 @@ export default function App() {
             <p>Давайте поделимся друг с другом счастливыми моментами этого важного дня и будем на связи!</p>
           </div>
 
-<div className="chat-images">
-  <motion.div
-    className="chat-image-left"
-    initial={{ opacity: 0, x: -16, y: 16, rotate: -2 }}
-    whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
-    viewport={{ once: true, amount: 0.35 }}
-    transition={{ duration: 0.8, ease: 'easeOut' }}
-  >
-    <img
-      src={chatImage1}
-      alt="Фото пары 1"
-      className="chat-photo"
-    />
-  </motion.div>
+          <div className="chat-images">
+            <motion.div
+              className="chat-image-left"
+              initial={{ opacity: 0, x: -16, y: 16, rotate: -2 }}
+              whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+            >
+              <img src={chatImage1} alt="Фото пары 1" className="chat-photo" />
+            </motion.div>
 
-  <motion.div
-    className="chat-image-right"
-    initial={{ opacity: 0, x: 16, y: 20, rotate: 2 }}
-    whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
-    viewport={{ once: true, amount: 0.35 }}
-    transition={{ duration: 0.8, delay: 0.08, ease: 'easeOut' }}
-  >
-    <img
-      src={chatImage2}
-      alt="Фото пары 2"
-      className="chat-photo"
-    />
-  </motion.div>
-</div>
+            <motion.div
+              className="chat-image-right"
+              initial={{ opacity: 0, x: 16, y: 20, rotate: 2 }}
+              whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.8, delay: 0.08, ease: 'easeOut' }}
+            >
+              <img src={chatImage2} alt="Фото пары 2" className="chat-photo" />
+            </motion.div>
+          </div>
 
           <motion.button
             className="chat-button"
@@ -477,7 +447,7 @@ export default function App() {
             <DetailCard delay={0.03}>
               По всем вопросам, просим обращаться к нашему организатору:
               <br />
-              Екатерина +79501400699
+              Екатерина +7 950 140 0699
             </DetailCard>
           </div>
 
