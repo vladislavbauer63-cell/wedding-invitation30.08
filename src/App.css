@@ -744,3 +744,33 @@ a {
     font-size: 16px;
   }
 }
+.questionnaire-message {
+  width: 100%;
+  margin-top: 14px;
+  text-align: center;
+  display: block;
+  font-size: 14px;
+  line-height: 1.45;
+  color: #4a0b12;
+}
+
+.questionnaire-message-success {
+  width: 100%;
+  padding: 18px 10px 6px;
+  text-align: center;
+  display: block;
+  font-size: 22px;
+  line-height: 1.45;
+  color: #4a0b12;
+}
+.questionnaire-form {
+  max-width: 420px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.questionnaire-submit-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
