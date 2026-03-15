@@ -429,15 +429,17 @@ export default function App() {
             </motion.div>
           </div>
 
-          <motion.button
-            className="chat-button"
-            type="button"
-            whileHover={{ y: -2, scale: 1.015 }}
-            whileTap={{ scale: 0.985 }}
-            transition={{ duration: 0.25 }}
-          >
-            ВСТУПИТЬ В ЧАТ
-          </motion.button>
+          <motion.a
+  href="https://t.me/+KhFOvuBvafc4YmE6"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="chat-button"
+  whileHover={{ y: -2, scale: 1.015 }}
+  whileTap={{ scale: 0.985 }}
+  transition={{ duration: 0.25 }}
+>
+  ВСТУПИТЬ В ЧАТ
+</motion.a>
         </AnimatedSection>
 
         <AnimatedSection className="center-section contacts-section" variant="soft">
