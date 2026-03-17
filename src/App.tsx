@@ -244,9 +244,9 @@ export default function App() {
       const formData = new FormData()
       formData.append('name', guestName.trim())
       formData.append('attendance', attendance)
-formData.append('withChildren', withChildren)
-formData.append('childrenCount', withChildren === 'Да' ? childrenCount.trim() : '')
-formData.append('food', food)
+      formData.append('withChildren', withChildren)
+      formData.append('childrenCount', withChildren === 'Да' ? childrenCount.trim() : '')
+      formData.append('food', food)
       formData.append('drinks', drinks.join(', '))
       formData.append('comment', comment.trim())
 
