@@ -205,6 +205,8 @@ export default function App() {
   const [guestName, setGuestName] = useState('')
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [attendance, setAttendance] = useState('')
+  const [withChildren, setWithChildren] = useState('')
+  const [childrenCount, setChildrenCount] = useState('')
   const [food, setFood] = useState('')
   const [drinks, setDrinks] = useState<string[]>([])
   const [comment, setComment] = useState('')
@@ -230,6 +232,11 @@ export default function App() {
       return
     }
 
+    if (withChildren === 'Да' && !childrenCount.trim()) {
+  setSubmitMessage('Пожалуйста, укажите количество детей.')
+  return
+}
+
     setIsSubmitting(true)
     setSubmitMessage('')
 
@@ -237,7 +244,9 @@ export default function App() {
       const formData = new FormData()
       formData.append('name', guestName.trim())
       formData.append('attendance', attendance)
-      formData.append('food', food)
+formData.append('withChildren', withChildren)
+formData.append('childrenCount', withChildren === 'Да' ? childrenCount.trim() : '')
+formData.append('food', food)
       formData.append('drinks', drinks.join(', '))
       formData.append('comment', comment.trim())
 
@@ -250,8 +259,10 @@ export default function App() {
 setSubmitMessage('')
 setIsSubmitted(true)
       setGuestName('')
-      setAttendance('')
-      setFood('')
+     setAttendance('')
+setWithChildren('')
+setChildrenCount('')
+setFood('')
       setDrinks([])
       setComment('')
     } catch (error) {
@@ -405,10 +416,7 @@ setIsSubmitted(true)
           </div>
         </AnimatedSection>
 
-        <AnimatedSection className="center-section" variant="soft">
-          <CountdownCard countdown={countdown} />
-        </AnimatedSection>
-
+        
         <AnimatedSection className="center-section">
           <SectionTitle>Дресс-код</SectionTitle>
           <p className="body-text dress-text">
@@ -505,6 +513,47 @@ setIsSubmitted(true)
     </div>
 
     <div className="questionnaire-field">
+  <div className="questionnaire-label">Планируете ли Вы быть с детьми?</div>
+  <div className="questionnaire-options">
+    <label className="questionnaire-option">
+      <input
+        type="radio"
+        name="withChildren"
+        checked={withChildren === 'Да'}
+        onChange={() => setWithChildren('Да')}
+      />
+      <span>Да</span>
+    </label>
+    <label className="questionnaire-option">
+      <input
+        type="radio"
+        name="withChildren"
+        checked={withChildren === 'Нет'}
+        onChange={() => {
+          setWithChildren('Нет')
+          setChildrenCount('')
+        }}
+      />
+      <span>Нет</span>
+    </label>
+  </div>
+</div>
+
+{withChildren === 'Да' && (
+  <div className="questionnaire-field">
+    <label className="questionnaire-label">Сколько детей будет с Вами?</label>
+    <input
+      type="number"
+      min="1"
+      className="questionnaire-input"
+      placeholder="Например: 2"
+      value={childrenCount}
+      onChange={(e) => setChildrenCount(e.target.value)}
+    />
+  </div>
+)}
+
+    <div className="questionnaire-field">
       <div className="questionnaire-label">Какое горячее Вы предпочитаете?</div>
       <div className="questionnaire-options">
         <label className="questionnaire-option">
@@ -599,6 +648,10 @@ setIsSubmitted(true)
   </form>
 )}
   </motion.div>
+</AnimatedSection>
+
+<AnimatedSection className="center-section" variant="soft">
+  <CountdownCard countdown={countdown} />
 </AnimatedSection>
 
         <AnimatedSection className="center-section">
