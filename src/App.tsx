@@ -33,7 +33,7 @@ const timeline: TimelineItem[] = [
   },
 ]
 
-const palette = ['#A4A197', '#6C6F38', '#5B3A29', '#9A001E', '#7A1118']
+const palette = ['#efb0a8', '#7b7b38', '#decab0', '#bbc8aa', '#aaa59b', '#72462e']
 const weddingDate = new Date('2026-08-30T15:00:00')
 const venueImage =
   'https://img.arendazala.net/pcpYKZHNBtIq5_xLFkVQl6NKqQXY400iIvGYAFQzqnyMofofuAAkipENeSt6t4gSbcJVW2858lcp22HtYCqqXNQzcjNZx9R6TEg3Zw=w560-h332-n-l95-rw'
@@ -720,7 +720,7 @@ setFood('')
             <DetailCard delay={0.03}>
               По всем вопросам, просим обращаться к нашему организатору:
               <br />
-              Екатерина +79501400699
+              Екатерина +79501400699 (tg @Solovaa)
             </DetailCard>
           </div>
 
