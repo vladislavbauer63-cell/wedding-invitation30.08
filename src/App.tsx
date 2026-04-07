@@ -19,22 +19,23 @@ const timeline: TimelineItem[] = [
   {
     time: '15:00',
     title: 'СБОР ГОСТЕЙ',
-    text: 'Встречаемся, настраиваемся на весёлую свадьбу, главное не опаздывать.',
+    text: 'Встречаемся, настраиваемся на прекрасный вечер и готовимся к празднику.',
   },
   {
     time: '16:00',
-    title: 'БАНКЕТ',
-    text: 'Самое время для вкусной еды, развлечений и поздравлений.',
+    title: 'ЦЕРЕМОНИЯ',
+    text: 'Самый трогательный момент нашего дня.',
   },
   {
-    time: '23:00',
-    title: 'ЗАВЕРШЕНИЕ',
-    text: 'К сожалению, даже такой приятный вечер заканчивается.',
+    time: '17:00',
+    title: 'БАНКЕТ',
+    text: 'Самое время для вкусной еды, развлечений и поздравлений.',
   },
 ]
 
 const palette = ['#efb0a8', '#7b7b38', '#decab0', '#bbc8aa', '#aaa59b', '#72462e']
 const weddingDate = new Date('2026-08-30T15:00:00')
+
 const venueImage =
   'https://img.arendazala.net/pcpYKZHNBtIq5_xLFkVQl6NKqQXY400iIvGYAFQzqnyMofofuAAkipENeSt6t4gSbcJVW2858lcp22HtYCqqXNQzcjNZx9R6TEg3Zw=w560-h332-n-l95-rw'
 
@@ -59,7 +60,8 @@ const fadeUp: Variants = {
   },
 }
 
-const formUrl = 'https://script.google.com/macros/s/AKfycbyEPPD5-aWy0-G8IbGBIdFdF0D7IvjRvC60wFXwdwZ1qqtXe2xmZTSgz7p1NFI-XsH_Kg/exec'
+const formUrl =
+  'https://script.google.com/macros/s/AKfycbyEPPD5-aWy0-G8IbGBIdFdF0D7IvjRvC60wFXwdwZ1qqtXe2xmZTSgz7p1NFI-XsH_Kg/exec'
 
 const softReveal: Variants = {
   hidden: { opacity: 0, scale: 0.98, y: 18 },
@@ -207,7 +209,7 @@ export default function App() {
   const [attendance, setAttendance] = useState('')
   const [withChildren, setWithChildren] = useState('')
   const [childrenCount, setChildrenCount] = useState('')
-  const [food, setFood] = useState('')
+  const [food, setFood] = useState<string[]>([])
   const [drinks, setDrinks] = useState<string[]>([])
   const [comment, setComment] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -216,6 +218,12 @@ export default function App() {
   function toggleDrink(drink: string) {
     setDrinks((prev) =>
       prev.includes(drink) ? prev.filter((item) => item !== drink) : [...prev, drink]
+    )
+  }
+
+  function toggleFood(foodItem: string) {
+    setFood((prev) =>
+      prev.includes(foodItem) ? prev.filter((item) => item !== foodItem) : [...prev, foodItem]
     )
   }
 
@@ -233,9 +241,9 @@ export default function App() {
     }
 
     if (withChildren === 'Да' && !childrenCount.trim()) {
-  setSubmitMessage('Пожалуйста, укажите количество детей.')
-  return
-}
+      setSubmitMessage('Пожалуйста, укажите количество детей.')
+      return
+    }
 
     setIsSubmitting(true)
     setSubmitMessage('')
@@ -246,7 +254,7 @@ export default function App() {
       formData.append('attendance', attendance)
       formData.append('withChildren', withChildren)
       formData.append('childrenCount', withChildren === 'Да' ? childrenCount.trim() : '')
-      formData.append('food', food)
+      formData.append('food', food.join(', '))
       formData.append('drinks', drinks.join(', '))
       formData.append('comment', comment.trim())
 
@@ -256,13 +264,13 @@ export default function App() {
         mode: 'no-cors',
       })
 
-setSubmitMessage('')
-setIsSubmitted(true)
+      setSubmitMessage('')
+      setIsSubmitted(true)
       setGuestName('')
-     setAttendance('')
-setWithChildren('')
-setChildrenCount('')
-setFood('')
+      setAttendance('')
+      setWithChildren('')
+      setChildrenCount('')
+      setFood([])
       setDrinks([])
       setComment('')
     } catch (error) {
@@ -271,6 +279,7 @@ setFood('')
       setIsSubmitting(false)
     }
   }
+
   useEffect(() => {
     const timer = window.setInterval(() => {
       setCountdown(getCountdown(weddingDate))
@@ -322,7 +331,7 @@ setFood('')
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85, delay: 0.28, ease: 'easeOut' }}
           >
-            Людмила  и  Владислав
+            Людмила и Владислав
           </motion.div>
 
           <motion.div
@@ -351,7 +360,7 @@ setFood('')
           <div className="big-heading comforter-title">
             Дорогие
             <br />
-            родные  и  друзья!
+            родные и друзья!
           </div>
           <p className="body-text intro-text">
             Мы очень хотим сделать этот день особенным, поэтому приглашаем Вас разделить с нами
@@ -362,7 +371,7 @@ setFood('')
         <AnimatedSection className="location-section" variant="soft">
           <div className="location-card">
             <SectionTitle>
-              Место  проведения
+              Место проведения
               <br />
               торжества
             </SectionTitle>
@@ -408,7 +417,7 @@ setFood('')
         </AnimatedSection>
 
         <AnimatedSection className="center-section">
-          <SectionTitle>Программа  дня</SectionTitle>
+          <SectionTitle>Программа дня</SectionTitle>
           <div className="timeline-list">
             {timeline.map((item, index) => (
               <TimelinePill key={`${item.time}-${item.title}`} item={item} delay={index * 0.08} />
@@ -416,7 +425,6 @@ setFood('')
           </div>
         </AnimatedSection>
 
-        
         <AnimatedSection className="center-section">
           <SectionTitle>Дресс-код</SectionTitle>
           <p className="body-text dress-text">
@@ -449,210 +457,223 @@ setFood('')
           </motion.div>
         </AnimatedSection>
 
-                           <AnimatedSection className="center-section questionnaire-section" variant="soft">
-  <motion.div
-    className="questionnaire-card"
-    layout
-    transition={{ duration: 0.45, ease: 'easeOut' }}
-  >
-    <div className="questionnaire-heart questionnaire-heart-left">♡</div>
-    <div className="questionnaire-heart questionnaire-heart-right">♡</div>
+        <AnimatedSection className="center-section questionnaire-section" variant="soft">
+          <motion.div
+            className="questionnaire-card"
+            layout
+            transition={{ duration: 0.45, ease: 'easeOut' }}
+          >
+            <div className="questionnaire-heart questionnaire-heart-left">♡</div>
+            <div className="questionnaire-heart questionnaire-heart-right">♡</div>
 
-    <div className="questionnaire-title comforter-title">Анкета</div>
+            <div className="questionnaire-title comforter-title">Анкета</div>
 
-    {!isSubmitted && (
-      <p className="questionnaire-subtitle">
-        Пожалуйста, подтвердите свое присутствие
-      </p>
-    )}
+            {!isSubmitted && (
+              <p className="questionnaire-subtitle">Пожалуйста, подтвердите свое присутствие</p>
+            )}
 
-    {isSubmitted ? (
-      <motion.div
-        className="questionnaire-message questionnaire-message-success"
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.35, ease: 'easeOut' }}
-      >
-        Спасибо! Ваш ответ сохранён.
-      </motion.div>
-    ) : (
-      <form className="questionnaire-form" onSubmit={handleQuestionnaireSubmit}>
-    <div className="questionnaire-field">
-      <label className="questionnaire-label">Ваше Имя и Фамилия</label>
-      <input
-        type="text"
-        className="questionnaire-input"
-        placeholder="ФИО"
-        value={guestName}
-        onChange={(e) => setGuestName(e.target.value)}
-      />
-    </div>
+            {isSubmitted ? (
+              <motion.div
+                className="questionnaire-message questionnaire-message-success"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+              >
+                Спасибо! Ваш ответ сохранён.
+              </motion.div>
+            ) : (
+              <form className="questionnaire-form" onSubmit={handleQuestionnaireSubmit}>
+                <div className="questionnaire-field">
+                  <label className="questionnaire-label">Ваше Имя и Фамилия</label>
+                  <input
+                    type="text"
+                    className="questionnaire-input"
+                    placeholder="ФИО"
+                    value={guestName}
+                    onChange={(e) => setGuestName(e.target.value)}
+                  />
+                </div>
 
-    <div className="questionnaire-field">
-      <div className="questionnaire-label">Вы сможете присутствовать?</div>
-      <div className="questionnaire-options">
-        <label className="questionnaire-option">
-          <input
-            type="radio"
-            name="attendance"
-            checked={attendance === 'Да'}
-            onChange={() => setAttendance('Да')}
-          />
-          <span>Да</span>
-        </label>
-        <label className="questionnaire-option">
-          <input
-            type="radio"
-            name="attendance"
-            checked={attendance === 'К сожалению, нет'}
-            onChange={() => setAttendance('К сожалению, нет')}
-          />
-          <span>К сожалению, нет</span>
-        </label>
-      </div>
-    </div>
+                <div className="questionnaire-field">
+                  <div className="questionnaire-label">Вы сможете присутствовать?</div>
+                  <div className="questionnaire-options">
+                    <label className="questionnaire-option">
+                      <input
+                        type="radio"
+                        name="attendance"
+                        checked={attendance === 'Да'}
+                        onChange={() => setAttendance('Да')}
+                      />
+                      <span>Да</span>
+                    </label>
+                    <label className="questionnaire-option">
+                      <input
+                        type="radio"
+                        name="attendance"
+                        checked={attendance === 'К сожалению, нет'}
+                        onChange={() => setAttendance('К сожалению, нет')}
+                      />
+                      <span>К сожалению, нет</span>
+                    </label>
+                  </div>
+                </div>
 
-    <div className="questionnaire-field">
-  <div className="questionnaire-label">Планируете ли Вы быть с детьми?</div>
-  <div className="questionnaire-options">
-    <label className="questionnaire-option">
-      <input
-        type="radio"
-        name="withChildren"
-        checked={withChildren === 'Да'}
-        onChange={() => setWithChildren('Да')}
-      />
-      <span>Да</span>
-    </label>
-    <label className="questionnaire-option">
-      <input
-        type="radio"
-        name="withChildren"
-        checked={withChildren === 'Нет'}
-        onChange={() => {
-          setWithChildren('Нет')
-          setChildrenCount('')
-        }}
-      />
-      <span>Нет</span>
-    </label>
-  </div>
-</div>
+                <div className="questionnaire-field">
+                  <div className="questionnaire-label">Планируете ли Вы быть с детьми?</div>
+                  <div className="questionnaire-options">
+                    <label className="questionnaire-option">
+                      <input
+                        type="radio"
+                        name="withChildren"
+                        checked={withChildren === 'Да'}
+                        onChange={() => setWithChildren('Да')}
+                      />
+                      <span>Да</span>
+                    </label>
+                    <label className="questionnaire-option">
+                      <input
+                        type="radio"
+                        name="withChildren"
+                        checked={withChildren === 'Нет'}
+                        onChange={() => {
+                          setWithChildren('Нет')
+                          setChildrenCount('')
+                        }}
+                      />
+                      <span>Нет</span>
+                    </label>
+                  </div>
+                </div>
 
-{withChildren === 'Да' && (
-  <div className="questionnaire-field">
-    <label className="questionnaire-label">Сколько детей будет с Вами?</label>
-    <input
-      type="number"
-      min="1"
-      className="questionnaire-input"
-      placeholder="Например: 2"
-      value={childrenCount}
-      onChange={(e) => setChildrenCount(e.target.value)}
-    />
-  </div>
-)}
+                {withChildren === 'Да' && (
+                  <div className="questionnaire-field">
+                    <label className="questionnaire-label">Сколько детей будет с Вами?</label>
+                    <input
+                      type="number"
+                      min="1"
+                      className="questionnaire-input"
+                      placeholder="Например: 2"
+                      value={childrenCount}
+                      onChange={(e) => setChildrenCount(e.target.value)}
+                    />
+                  </div>
+                )}
 
-    <div className="questionnaire-field">
-      <div className="questionnaire-label">Какое горячее Вы предпочитаете?</div>
-      <div className="questionnaire-options">
-        <label className="questionnaire-option">
-          <input
-            type="radio"
-            name="food"
-            checked={food === 'Мясо'}
-            onChange={() => setFood('Мясо')}
-          />
-          <span>Мясо</span>
-        </label>
-        <label className="questionnaire-option">
-          <input
-            type="radio"
-            name="food"
-            checked={food === 'Рыба'}
-            onChange={() => setFood('Рыба')}
-          />
-          <span>Рыба</span>
-        </label>
-        <label className="questionnaire-option">
-          <input
-            type="radio"
-            name="food"
-            checked={food === 'Курица'}
-            onChange={() => setFood('Курица')}
-          />
-          <span>Курица</span>
-        </label>
-      </div>
-    </div>
+                <div className="questionnaire-field">
+                  <div className="questionnaire-label">
+                    Какое горячее Вы предпочитаете? Можно выбрать несколько вариантов
+                  </div>
+                  <div className="questionnaire-options">
+                    <label className="questionnaire-option">
+                      <input
+                        type="checkbox"
+                        checked={food.includes('Мясо')}
+                        onChange={() => toggleFood('Мясо')}
+                      />
+                      <span>Мясо</span>
+                    </label>
+                    <label className="questionnaire-option">
+                      <input
+                        type="checkbox"
+                        checked={food.includes('Рыба')}
+                        onChange={() => toggleFood('Рыба')}
+                      />
+                      <span>Рыба</span>
+                    </label>
+                    <label className="questionnaire-option">
+                      <input
+                        type="checkbox"
+                        checked={food.includes('Курица')}
+                        onChange={() => toggleFood('Курица')}
+                      />
+                      <span>Курица</span>
+                    </label>
+                  </div>
+                </div>
 
-    <div className="questionnaire-field">
-      <div className="questionnaire-label">
-        Уточните Ваши предпочтения в напитках, выбрав один или несколько вариантов:
-      </div>
-      <div className="questionnaire-options">
-        <label className="questionnaire-option">
-          <input
-            type="checkbox"
-            checked={drinks.includes('Шампанское')}
-            onChange={() => toggleDrink('Шампанское')}
-          />
-          <span>Шампанское</span>
-        </label>
-        <label className="questionnaire-option">
-          <input
-            type="checkbox"
-            checked={drinks.includes('Вино')}
-            onChange={() => toggleDrink('Вино')}
-          />
-          <span>Вино</span>
-        </label>
-        <label className="questionnaire-option">
-          <input
-            type="checkbox"
-            checked={drinks.includes('Виски + кола')}
-            onChange={() => toggleDrink('Виски + кола')}
-          />
-          <span>Виски + кола</span>
-        </label>
-        <label className="questionnaire-option">
-          <input
-            type="checkbox"
-            checked={drinks.includes('Безалкогольные напитки')}
-            onChange={() => toggleDrink('Безалкогольные напитки')}
-          />
-          <span>Безалкогольные напитки</span>
-        </label>
-      </div>
-    </div>
+                <div className="questionnaire-field">
+                  <div className="questionnaire-label">
+                    Уточните Ваши предпочтения в напитках, выбрав один или несколько вариантов:
+                  </div>
+                  <div className="questionnaire-options">
+                    <label className="questionnaire-option">
+                      <input
+                        type="checkbox"
+                        checked={drinks.includes('Шампанское')}
+                        onChange={() => toggleDrink('Шампанское')}
+                      />
+                      <span>Шампанское</span>
+                    </label>
+                    <label className="questionnaire-option">
+                      <input
+                        type="checkbox"
+                        checked={drinks.includes('Водка')}
+                        onChange={() => toggleDrink('Водка')}
+                      />
+                      <span>Водка</span>
+                    </label>
+                    <label className="questionnaire-option">
+                      <input
+                        type="checkbox"
+                        checked={drinks.includes('Красное вино')}
+                        onChange={() => toggleDrink('Красное вино')}
+                      />
+                      <span>Красное вино</span>
+                    </label>
+                    <label className="questionnaire-option">
+                      <input
+                        type="checkbox"
+                        checked={drinks.includes('Белое вино')}
+                        onChange={() => toggleDrink('Белое вино')}
+                      />
+                      <span>Белое вино</span>
+                    </label>
+                    <label className="questionnaire-option">
+                      <input
+                        type="checkbox"
+                        checked={drinks.includes('Виски')}
+                        onChange={() => toggleDrink('Виски')}
+                      />
+                      <span>Виски</span>
+                    </label>
+                    <label className="questionnaire-option">
+                      <input
+                        type="checkbox"
+                        checked={drinks.includes('Безалкогольные напитки')}
+                        onChange={() => toggleDrink('Безалкогольные напитки')}
+                      />
+                      <span>Безалкогольные напитки</span>
+                    </label>
+                  </div>
+                </div>
 
-    <div className="questionnaire-field">
-      <label className="questionnaire-label">Комментарий или пожелания</label>
-      <textarea
-        className="questionnaire-textarea"
-        placeholder="Например: не употребляю алкоголь, есть аллергия, нужен детский стул и т.д."
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-      />
-    </div>
+                <div className="questionnaire-field">
+                  <label className="questionnaire-label">Комментарий или пожелания</label>
+                  <textarea
+                    className="questionnaire-textarea"
+                    placeholder="Например: не употребляю алкоголь, есть аллергия, нужен детский стул и т.д."
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                  />
+                </div>
 
-    <div className="questionnaire-submit-wrap">
-      <button type="submit" className="questionnaire-submit" disabled={isSubmitting}>
-        {isSubmitting ? 'ОТПРАВКА...' : 'ОТПРАВИТЬ'}
-      </button>
-    </div>
+                <div className="questionnaire-submit-wrap">
+                  <button type="submit" className="questionnaire-submit" disabled={isSubmitting}>
+                    {isSubmitting ? 'ОТПРАВКА...' : 'ОТПРАВИТЬ'}
+                  </button>
+                </div>
 
-    {submitMessage && !isSubmitted ? (
-      <div className="questionnaire-message">{submitMessage}</div>
-    ) : null}
-  </form>
-)}
-  </motion.div>
-</AnimatedSection>
+                {submitMessage && !isSubmitted ? (
+                  <div className="questionnaire-message">{submitMessage}</div>
+                ) : null}
+              </form>
+            )}
+          </motion.div>
+        </AnimatedSection>
 
-<AnimatedSection className="center-section" variant="soft">
-  <CountdownCard countdown={countdown} />
-</AnimatedSection>
+        <AnimatedSection className="center-section" variant="soft">
+          <CountdownCard countdown={countdown} />
+        </AnimatedSection>
 
         <AnimatedSection className="center-section">
           <SectionTitle>Детали</SectionTitle>
@@ -662,20 +683,24 @@ setFood('')
             </DetailCard>
 
             <DetailCard delay={0.1}>
-              Приятным комплиментом для нас будет, если вместо цветов Вы подарите бутылочку алкогольного напитка для пополнения нашей семейной коллекции.
+              Приятным комплиментом для нас будет, если вместо цветов Вы подарите бутылочку
+              алкогольного напитка для пополнения нашей семейной коллекции.
             </DetailCard>
           </div>
         </AnimatedSection>
 
         <AnimatedSection className="center-section" variant="soft">
-          <SectionTitle>Чат  для  гостей</SectionTitle>
+          <SectionTitle>Чат для гостей</SectionTitle>
 
           <div className="chat-text body-text">
             <p>
               Для Вашего удобства мы создали чат в Telegram, куда можно будет добавлять фото и
               видео со свадьбы.
             </p>
-            <p>Давайте поделимся друг с другом счастливыми моментами этого важного дня и будем на связи!</p>
+            <p>
+              Давайте поделимся друг с другом счастливыми моментами этого важного дня и будем на
+              связи!
+            </p>
           </div>
 
           <div className="chat-images">
@@ -720,7 +745,7 @@ setFood('')
             <DetailCard delay={0.03}>
               По всем вопросам, просим обращаться к нашему организатору:
               <br />
-              Екатерина +79501400699 (tg @Solovaa)
+              Екатерина +79501400699
             </DetailCard>
           </div>
 
@@ -731,8 +756,8 @@ setFood('')
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.85, delay: 0.08, ease: 'easeOut' }}
           >
-          <span className="closing-prefix">С любовью,</span>
-            <span className="closing-names comforter-title">Людмила  и  Владислав</span>
+            <span className="closing-prefix">С любовью,</span>
+            <span className="closing-names comforter-title">Людмила и Владислав</span>
           </motion.div>
 
           <motion.div
